@@ -232,3 +232,5 @@ __marimo__/
 /modules.xml
 /inspectionProfiles/profiles_settings.xml
 /vcs.xml
+/discord.xml
+/dataSources.xml
