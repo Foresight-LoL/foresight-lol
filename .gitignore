@@ -1,3 +1,8 @@
 /CLAUDE.md
 /notebooks/.ipynb_checkpoints/
 /.env
+/.idea/data_source_mapping.xml
+/.idea/db-forest-config.xml
+/.idea/dictionaries/project.xml
+/.idea/sqlDataSources.xml
+/.idea/sqldialects.xml
