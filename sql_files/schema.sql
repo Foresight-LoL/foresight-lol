@@ -11,7 +11,7 @@ CREATE TYPE ChallengePointDto AS(
     level TEXT,
     current BIGINT,
     max BIGINT,
-    percentile BIGINT
+    percentile REAL
                              );
 CREATE TABLE IF NOT EXISTS player_snapshots(
      puuid TEXT NOT NULL,
@@ -34,12 +34,12 @@ CREATE TABLE IF NOT EXISTS masteries(
     puuid TEXT NOT NULL,
     champion_id BIGINT NOT NULL,
 
-    champion_points_until_next_level BIGINT,
+    champion_points_until_next_level INT,
     chest_granted BOOLEAN,
-    last_play_time BIGINT,
+    last_play_time TIMESTAMP,
     champion_level INT,
     champion_points INT,
-    champion_points_since_last_level BIGINT,
+    champion_points_since_last_level INT,
     mark_required_for_next_level INT,
     champion_season_milestone INT,
     tokens_earned INT,
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS challenges(
 
     percentile REAL,
     players_in_level INT,
-    achieved_time BIGINT,
+    achieved_time TIMESTAMP,
     value REAL,
     level TEXT,
     position INT,
