@@ -1,8 +1,13 @@
 name: integration-tests
 on:
-  push:
-    branches: [master, development]
   pull_request:
+    branches: [development]
+  push:
+    branches-ignore: [master, development]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tests:
