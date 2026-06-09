@@ -1,5 +1,4 @@
 import asyncio
-from http.cookiejar import request_path
 from typing import Optional, List, Tuple
 
 from utils.api.riot.models.player.challenge import Challenge
