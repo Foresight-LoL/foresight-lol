@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+# Put the repo root on sys.path so tests can `import utils...` under the bare
+# `pytest` console script (which, unlike `python -m pytest`, does not add cwd).
+pythonpath = ["."]
+testpaths = ["tests"]
