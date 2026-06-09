@@ -5,8 +5,8 @@ from typing import Optional
 
 import aiohttp
 
-from utils.api.riot.region import Region
-from utils.api.riot.riot_api_response import RiotAPIResponse
+from utils.api.riot.models.base.region import Region
+from utils.api.riot.models.base.riot_api_response import RiotAPIResponse
 from utils.api.token_bucket import TokenBucket
 
 

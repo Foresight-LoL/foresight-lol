@@ -5,7 +5,7 @@ from typing import List, Self, Dict
 import polars as pl
 
 from utils.api.riot.models.api_model_interface import APIModelInterface
-from utils.api.riot.region import Region
+from utils.api.riot.models.base.region import Region
 
 
 @dataclass
@@ -15,6 +15,10 @@ class PlayerBase(APIModelInterface):
     tag_line: str
     region: str
     synced_at: datetime
+
+    @classmethod
+    def get_keys(cls) -> List[str]:
+        return ["puuid"]
 
     @classmethod
     def to_dataframe(cls, records: List[Self]) -> pl.DataFrame:

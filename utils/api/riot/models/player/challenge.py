@@ -15,6 +15,10 @@ class ChallengeTotalPointsDTO(APIModelInterface):
     percentile: float
 
     @classmethod
+    def get_keys(cls) -> List[str]:
+        return []
+
+    @classmethod
     def to_dataframe(cls, records: List[Self]) -> pl.DataFrame:
         return pl.DataFrame(records)
 
@@ -45,11 +49,15 @@ class Challenge(APIModelInterface):
     position: Optional[int]
 
     @classmethod
+    def get_keys(cls) -> List[str]:
+        return ["puuid", "challenge_id"]
+
+    @classmethod
     def to_dataframe(cls, records: List[Self]) -> pl.DataFrame:
         return pl.DataFrame(records)
 
     @classmethod
-    def from_json(cls, json_data: List | Dict) -> List[Self]:
+    def from_json(cls, puuid: str, json_data: List | Dict) -> List[Self]:
         challenges_list = json_data if isinstance(json_data, list) else json_data["challenges"]
 
         challenges_arr = []
@@ -58,7 +66,7 @@ class Challenge(APIModelInterface):
 
             challenges_arr.append(
                 Challenge(
-                    puuid=challenge_entry["puuid"],
+                    puuid=puuid,
                     challenge_id=challenge_entry["challengeId"],
                     percentile=challenge_entry["percentile"],
                     players_in_level=challenge_entry.get("playersInLevel"),

@@ -12,3 +12,7 @@ class APIModelInterface(ABC):
     @classmethod
     @abstractmethod
     def from_json(cls, *args, **kwargs) -> Self | List[Self]: ...
+
+    @classmethod
+    @abstractmethod
+    def get_keys(cls) -> List[str]: ...
