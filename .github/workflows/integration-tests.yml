@@ -49,8 +49,8 @@ jobs:
 
       - name: load schema
         run: |
-          # todo: change this when we move from neon db
-          psql "$INTEGRATION_DATABASE_URL" -v ON_ERROR_STOP=1 -c "CREATE ROLE neondb_owner;"
+          psql "$INTEGRATION_DATABASE_URL" -v ON_ERROR_STOP=1 -c "CREATE ROLE dev;"
+          psql "$INTEGRATION_DATABASE_URL" -v ON_ERROR_STOP=1 -c "CREATE SCHEMA test;"
           psql "$INTEGRATION_DATABASE_URL" -v ON_ERROR_STOP=1 -f scripts/sql/schema.sql
 
       - name: run tests

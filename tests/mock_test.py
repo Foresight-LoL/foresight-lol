@@ -38,7 +38,7 @@ def test_upsert_dataframe_dto_writes_composite_rows(connection_wrapper):
 
     connection_wrapper.upsert_dataframe_dto(
         test_df,
-        "test_table",
+        "test.test_table",
         ["id"]
     )
 

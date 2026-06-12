@@ -53,6 +53,14 @@ class PostgresConnection:
         raise TypeError(f"can't adapt {type(value)} to composite")
 
     @classmethod
+    def _get_split_identifier(cls, identifier: str) -> sql.Identifier:
+        return sql.Identifier(*identifier.split('.'))
+
+    @classmethod
+    def _get_temp_identifier(cls, identifier: str) -> sql.Identifier:
+        return sql.Identifier(f"_tmp_{identifier.split('.')[-1]}")
+
+    @classmethod
     def check_dataframe_writeable(
             cls,
             dataframe: pl.DataFrame,
@@ -122,7 +130,7 @@ class PostgresConnection:
             return 0
 
         sql_operation = self._get_insert_query(
-            table_name=sql.Identifier(table_name),
+            table_name=self._get_split_identifier(table_name),
             columns_list=sql.SQL(", ").join(map(sql.Identifier, columns)),
             values=sql.SQL(", ").join(sql.Placeholder() * len(columns)),
             stage_table_name=None,
@@ -153,8 +161,8 @@ class PostgresConnection:
             self.logger.warning("dataframe has no writeable data")
             return 0
 
-        temp_table = sql.Identifier(f"_tmp_{table_name}")
-        target_table = sql.Identifier(table_name)
+        temp_table = self._get_temp_identifier(table_name)
+        target_table = self._get_split_identifier(table_name)
 
         columns_sql = sql.SQL(", ").join(map(sql.Identifier, columns))
         with self.connection.transaction():
